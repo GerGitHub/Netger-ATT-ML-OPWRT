@@ -1,7 +1,29 @@
 # Wan获取公网IP命令脚本  
 
-### 本命令主要针对部分大局域网用户, WAN口IP有时是公网有时是以10开头的大局域网IP     
-          
+### 本命令主要针对部分大局域网用户, WAN口IP有时是公网有时是以10开头的大局域网IP,以下有2种方法
+
+
+### 每天定时执行1次脚本,会连续检测50次
+
+#!/bin/sh
+for i in `seq 50`
+do
+IPF=`ifconfig |grep -A1 "ppp0" |grep "inet" |awk -F . '{print $1}'|awk -F \: '{print $2}'`
+if [ "$IPF" = "10" ]
+then
+echo "Bad IP Go Redial"
+killall pppd
+sleep 1
+pppd file /tmp/ppp/options.wan0 >/dev/null 2>&1 &
+else
+echo "Good IP"
+break
+fi
+done
+
+
+### 每分钟去执行检查1次WAN口IP地址
+         
 命令如下:     
 
     #!/bin/sh
