@@ -60,8 +60,8 @@ cru a GDDIP "* 5 * * * /jffs/scripts/GDDIP.sh"  , 每天5点钟执行该命令
           killall pppd
           sleep 1
           pppd file /tmp/ppp/options.wan0 >/dev/null 2>&1 &
-          sleep 30
-        else
+          sleep 30
+         else
           echo "what you input is : $IPF"
            break;
         fi
