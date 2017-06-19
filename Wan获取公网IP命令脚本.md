@@ -3,7 +3,8 @@
 ### 本命令主要针对部分大局域网用户, WAN口IP有时是公网有时是以10开头的大局域网IP     
           
 
-命令如下:  
+命令如下:     
+
     #!/bin/sh
     IPF=`ifconfig |grep -A1 "ppp0" |grep "inet" |awk -F . '{print $1}'|awk -F \: '{print $2}'`
     if [ "$IPF" = "10" ]
