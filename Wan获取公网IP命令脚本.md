@@ -39,19 +39,32 @@ cru a GDDIP "* 5 * * * /jffs/scripts/GDDIP.sh"  , 每天5点钟执行该命令
 命令如下:     
 
       #!/bin/sh
-      while :
-      do
-         IPF=`ifconfig |grep -A1 "ppp0" |grep "inet" |awk -F . '{print $1}'|awk -F \: '{print $2}'`
-         if [ "$IPF" = "10" ]
-         then
+      IPF=`ifconfig |grep -A1 "ppp0" |grep "inet" |awk -F . '{print $1}'|awk -F \: '{print $2}'`
+      if [ "$IPF" = "10" ]; then
             echo "Bad IP Go Redial"
             killall pppd
             sleep 1
             pppd file /tmp/ppp/options.wan0 >/dev/null 2>&1 &
-         else
+      else
             echo "Good IP"
             break
-         fi
+      fi
+      
++ 改用while循环
+
+      while :
+      do
+        IPF=$(wget -qO - ddns.oray.com/checkip|tr -cd [0-9.] | awk -F . '{print $1}')  
+        if [ "$IPF" = "58" ] ; then
+          echo "Bad IP Go Redial"
+          killall pppd
+          sleep 1
+          pppd file /tmp/ppp/options.wan0 >/dev/null 2>&1 &
+          sleep 30
+        else
+          echo "what you input is : $IPF"
+           break;
+        fi
       done
    
 语法解释:   
