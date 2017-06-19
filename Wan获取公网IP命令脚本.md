@@ -52,6 +52,7 @@ cru a GDDIP "* 5 * * * /jffs/scripts/GDDIP.sh"  , 每天5点钟执行该命令
       
 + 改用while循环
 
+      #!/bin/sh
       while :
       do
         IPF=$(wget -qO - ddns.oray.com/checkip|tr -cd [0-9.] | awk -F . '{print $1}')  
