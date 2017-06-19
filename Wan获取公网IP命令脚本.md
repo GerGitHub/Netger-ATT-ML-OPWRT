@@ -51,19 +51,21 @@ cru a GDDIP "* 5 * * * /jffs/scripts/GDDIP.sh"  , 每天5点钟执行该命令
       fi
       
 + 改用while循环
-
+    
       #!/bin/sh
       while :
       do
-        IPF=$(wget -qO - ddns.oray.com/checkip|tr -cd [0-9.] | awk -F . '{print $1}')  
-        if [ "$IPF" = "58" ] ; then
-          echo "Bad IP Go Redial"
+        WIP=$(ifconfig |grep -A1 "ppp0" |grep "inet" | awk -F : '{print $2}' | awk '{print $1}')
+        IPH=$(echo "$WIP"|awk -F . '{print $1}')
+        if [ "$IPH" = "10" ] ; then
+          echo "Bad IP is : $WIP"
+          echo "Go Redial"
           killall pppd
-          sleep 1
+          sleep 2
           pppd file /tmp/ppp/options.wan0 >/dev/null 2>&1 &
-          sleep 30
+          sleep 28
          else
-          echo "what you input is : $IPF"
+          echo "Good IP is : $WIP"
            break;
         fi
       done
