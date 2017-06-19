@@ -10,8 +10,8 @@
       then
         echo "Bad IP Go Redial"
         killall pppd
-        # sleep 1
-        pppd file /tmp/ppp/options.wan0 >/dev/null 2>&1 &
+        sleep 1
+        pppd file /tmp/ppp/options.wan0 >/dev/null 2>&1 &
       else
         echo "Good IP"
         break
@@ -23,4 +23,4 @@
 后段验WAN口IP头是否是10,如果是10就中断拨号进程, 等待3秒, 再执行拨号; 否则IP头不是10则当前WAN口是公网IP,并中断此循环;
 
 + 新建命令文件 GDDIP.sh 保存至 /jffs/scripts/ 目录
-+ 在 /jffs/scripts/init-start 文件内写入 cru a GDDIP "*/ * * * * /jffs/scripts/pppoe.sh" 添加计划命令
++ 在 /jffs/scripts/init-start 文件内写入 cru a GDDIP "*/ * * * * /jffs/scripts/pppoe.sh"  添加计划命令
