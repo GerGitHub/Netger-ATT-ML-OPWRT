@@ -39,6 +39,8 @@ cru a GDDIP "* 5 * * * /jffs/scripts/GDDIP.sh"  , 每天5点钟执行该命令
 命令如下:     
 
     #!/bin/sh
+    while :
+    do
     IPF=`ifconfig |grep -A1 "ppp0" |grep "inet" |awk -F . '{print $1}'|awk -F \: '{print $2}'`
     if [ "$IPF" = "10" ]
       then
@@ -50,6 +52,7 @@ cru a GDDIP "* 5 * * * /jffs/scripts/GDDIP.sh"  , 每天5点钟执行该命令
         echo "Good IP"
         break
      fi
+     done
    
 语法解释:   
 第2行获取WAN口IP的第1段数字,  
