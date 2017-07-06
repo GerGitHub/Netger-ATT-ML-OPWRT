@@ -38,9 +38,12 @@
      upnp - 端口转发UPNP服务
      wan
     
-*** 注意   
-  
-      * -- Everything - 结束所有服务项 与 "kill -HUP 1" 作用相同
   
 ### 例如:     
-    service wan restart  #重新拨号   
+    service wan restart  #重新拨号  
+     
++ 注意:以下两条命令作用相同, 重新所有服务,相当于重启   
+   
+      * -- Everything
+      kill -HUP 1
+     
