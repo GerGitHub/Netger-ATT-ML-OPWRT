@@ -47,3 +47,7 @@
       * -- Everything
       kill -HUP 1
      
+
+[参考1](http://www.linksysinfo.org/index.php?threads/starting-stopping-and-restarting-services-from-cli-command-line-via-ssh-or-telnet.26491/)   Starting, Stopping and Restarting Services from CLI Command Line via SSH or Telnet
+
+
