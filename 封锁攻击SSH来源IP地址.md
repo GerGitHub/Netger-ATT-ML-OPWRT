@@ -46,8 +46,8 @@ Sep 17 09:10:14 localhost sshd[29223]: Failed password for root from 13.7.3.6 po
       
 ## 参考资料 2   
 [shell awk 统计重复个数](http://leichenlei.iteye.com/blog/1676649)                
-有文件file.log内容如下：            
-http://www.sohu.com/aaa      
+有文件file.log内容如下：            
+http://www.sohu.com/aaa     
 http://www.sina.com/111             
 http://www.sohu.com/bbb              
 http://www.sina.com/222             
