@@ -67,3 +67,30 @@ sort 的-r是降序，-k是按照第几组字符排序，从1开始。
 a可以理解成key-value形式的对象，域名做key 个数做value。            
 在end动作里完成对结果a的打印，         
 注意： 这个方法还可以用来统计日志中响应时间等等。    
+    
+## 参考资料 3
+[awk的sort命令学习一例]{http://liran728729.blog.51cto.com/2505117/1152213}    
+采用awk内建的排序函数asort，asorti进行。             
+#cat 1 | awk '{a[$NF]=$0}END{l=asorti(a,b);for(i=1;i<=l;i++)print a[b[i]]}            
+思路，用每一行的第三列作为数组下标，整行作为值，然后对下标进行排序，后输出数组的值。                   
+伪代码如下：             
+a[56]="12 34 56"            
+a[12]="78 90 12"              
+a[89]="23 45 89"    
+然后对下标排序。          
+a[12]="78 90 12"       
+a[56]="12 34 56"                   
+a[89]="23 45 89"                   
+然后输出就OK了            
+            
+1，NF为域的个数       
+#cat 1 | awk '{print NF,$NF}'           
+3 56       
+3 12                     
+3 89             
+从上面可以看出上面默认分为了3个域，所以NF=3，$NF=$3,awk是行读入，所以$3即为输出每一行的第三个域的值。         
+2，asort，asorti的用法           
+参考：http://www.gnu.org/software/gawk/manual/gawk.html#Array-Sorting           
+
+
+
