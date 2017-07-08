@@ -7,7 +7,7 @@
   
   
 ## 参考资料 1
-[ssh访问控制，多次失败登录即封掉IP，防止暴力破解]{http://www.cnblogs.com/panblack/p/secure_ssh_auto_block.html}    
+[ssh访问控制，多次失败登录即封掉IP，防止暴力破解](http://www.cnblogs.com/panblack/p/secure_ssh_auto_block.html)          
 一、系统：Centos6.3 64位   
 二、方法：读取/var/log/secure，查找关键字 Failed，例如（注：文中的IP地址特意做了删减）：    
       
@@ -45,7 +45,7 @@ Sep 17 09:10:14 localhost sshd[29223]: Failed password for root from 13.7.3.6 po
       */1 * * * *  sh /usr/local/bin/secure_ssh.sh
       
 ## 参考资料 2   
-[shell awk 统计重复个数]{http://leichenlei.iteye.com/blog/1676649}
+[shell awk 统计重复个数](http://leichenlei.iteye.com/blog/1676649)                
 有文件file.log内容如下：            
 http://www.sohu.com/aaa      
 http://www.sina.com/111             
@@ -69,7 +69,7 @@ a可以理解成key-value形式的对象，域名做key 个数做value。
 注意： 这个方法还可以用来统计日志中响应时间等等。    
     
 ## 参考资料 3
-[awk的sort命令学习一例]{http://liran728729.blog.51cto.com/2505117/1152213}    
+[awk的sort命令学习一例](http://liran728729.blog.51cto.com/2505117/1152213)    
 采用awk内建的排序函数asort，asorti进行。             
 #cat 1 | awk '{a[$NF]=$0}END{l=asorti(a,b);for(i=1;i<=l;i++)print a[b[i]]}            
 思路，用每一行的第三列作为数组下标，整行作为值，然后对下标进行排序，后输出数组的值。                   
