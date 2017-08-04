@@ -1,6 +1,10 @@
-# Iptables使用
+# Iptables使用    
 
-### 防暴力破解的命令一
+## 注意   
+iptables规则允许规则需放在阻止规则上面，因为linux执行规则时是从上往下，如果让系统先执行阻止规则，再去执行允许规则，允许规则会失效。    
+iptables的规则匹配顺序上从上到下的，也就是说如果上下两条规则有冲突时，将会以上面的规则为准。
+
+### 防暴力破解的命令一    
 
     iptables -I INPUT -p tcp --dport 22 -i eth0 -m state --state NEW -m recent --set
     iptables -I INPUT -p tcp --dport 22 -i eth0 -m state --state NEW -m recent --update --seconds 60 --hitcount 4 -j DROP
@@ -31,12 +35,8 @@ iptables -A INPUT -p icmp --icmp-type 8 -s 0/0 -j drop
 #允许本服务器ping通别人，阻止别人ping通本服务器    
 service iptables save     
 #保存iptables防火墙设置    
- 
-*** 注：iptables规则允许规则需放在阻止规则上面，因为linux执行规则时是从上往下，如果让系统先执行阻止规则，再去执行允许规则，允许规则会失效。
 
-
-
-### Iptables使用
+### Iptables使用    
 封单个IP的命令：iptables -I INPUT -s 124.115.0.199 -j DROP   
 封IP段的命令：iptables -I INPUT -s 124.115.0.0/16 -j DROP    
 封整个段的命令：iptables -I INPUT -s 194.42.0.0/8 -j DROP    
@@ -54,12 +54,8 @@ service iptables save
 以上都是针对INPUT链的操作，即是外面来访问本机的方向，配置完之后 需要保存，否则iptables 重启之后以上设置就失效    
 service iptables save    
 iptables 对应的配置文件  /etc/sysconfig/iptables    
-注意：iptables的规则匹配顺序上从上到下的，也就是说如果上下两条规则有冲突时，将会以上面的规则为准。    
-    
-    
-
-### iptables使用二
      
+### iptables使用二          
 封单个IP的命令是：      
     iptables -I INPUT -s 211.1.0.0 -j DROP   
 封IP段的命令是：
