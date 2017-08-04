@@ -7,7 +7,42 @@
      
 第一句是说，对于外来数据，如果是 TCP 协议，目标端口号是 22，网络接口是 eth0，状态是新连接，那么把它加到最近列表中。        
 第二句是说，对于这样的连接，如果在最近列表中，并且在 60 秒内达到或者超过四次，那么丢弃该数据。其中的-m是模块的意思。         
-也就是说，如果有人从一个 IP 一分钟内连接尝试四次 ssh 登录的话，那么它就会被加入黑名单，后续连接将会被丢弃。              
+也就是说，如果有人从一个 IP 一分钟内连接尝试四次 ssh 登录的话，那么它就会被加入黑名单，后续连接将会被丢弃。不过不知道多久以后那个 IP 才能重新连接上。      
+
+### 防 ssh 暴力破解的命令二
+     
+封单个IP的命令是：      
+    iptables -I INPUT -s 211.1.0.0 -j DROP   
+封IP段的命令是：
+    iptables -I INPUT -s 211.1.0.0/16 -j DROP      
+    iptables -I INPUT -s 211.2.0.0/16 -j DROP      
+    iptables -I INPUT -s 211.3.0.0/16 -j DROP      
+封整个段的命令是：   
+    iptables -I INPUT -s 211.0.0.0/8 -j DROP       
+封几个段的命令是：  
+    iptables -I INPUT -s 61.37.80.0/24 -j DROP      
+    iptables -I INPUT -s 61.37.81.0/24 -j DROP 
+     
+【解封】  
+    iptables -D INPUT -s IP地址 -j REJECT      
+如果发现input连接 命令不起作用，则可以 路由连接参数 使用下面命令      
+iptables -A FORWARD -s 1.202.0.0/16 -j DROP            
+在unix中IP子网掩码可用16,24,32等数字来表示,意思是:16表示子网掩码的前16位是全1,24、32以此类推。      
+iptables -A FORWARD -s 61.172.0.0/16 -i 网卡名称 -j DROP      
+--------有人说这种方法比较好用，这句比你防火墙管用--------      
+那句只能禁止一个ip路由  #route add 61.172.0.0/16 reject      
+这句可以封整段       #route add -net  61.172.0.0 netmask 255.255.0.0 reject          
+下面看些实际例子，设计封第几个IP段的问题：      
+------如果要封的内容是 061.037.080.000->061.037.081.255 -----      
+    iptables -I INPUT -s 61.37.80.0/24 -j DROP      
+    iptables -I INPUT -s 61.37.81.0/24 -j DROP            
+-----用什么命令可以让iptables 封了 211.1.0.0 到 211.10.0.0 IP段?-----------      
+    iptables -I INPUT -s 211.1.0.0/16 -j DROP      
+    iptables -I INPUT -s 211.2.0.0/16 -j DROP      
+    iptables -I INPUT -s 211.3.0.0/16 -j DROP      
+------如果要封的内容是整段的 比如 211.0.0.0 - 211.255.255.255 -------------      
+    iptables -I INPUT -s 211.0.0.0/8 -j DROP      
+
 
 ### Iptables使用
 封单个IP的命令：iptables -I INPUT -s 124.115.0.199 -j DROP   
