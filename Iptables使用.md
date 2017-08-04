@@ -88,6 +88,7 @@ iptables -A FORWARD -s 61.172.0.0/16 -i 网卡名称 -j DROP
 ------如果要封的内容是整段的 比如 211.0.0.0 - 211.255.255.255 -------------      
     iptables -I INPUT -s 211.0.0.0/8 -j DROP      
   
-    
-    
-    
+    
+#  参考文章   
+
+[iptables禁IP与解封IP常用命令](https://yusi123.com/3092.html)
