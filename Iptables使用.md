@@ -14,6 +14,21 @@ iptables的规则匹配顺序上从上到下的，也就是说如果上下两条
 也就是说，如果有人从一个 IP 一分钟内连接尝试四次 ssh 登录的话，那么它就会被加入黑名单，后续连接将会被丢弃。不过不知道多久以后那个 IP 才能重新连接上。      
 
 
+##  字典攻击
+
+Internet上的计算机难免遭受各类攻击，比如SSH字典攻击。如果你自信自己的密码足够强大，那么你也必须忍受系统日志中大量的“SSH Failed”记录。如果你习惯经常查看日志，那么这些记录会干扰你作出正确判断。Lesca尝试过各类方法，终于找到一种极为简单奏效的方法——利用iptables的recent模块：     
+
+    # Prevent SSH Attack
+    iptables -A INPUT -i eth0 -p tcp --dport 22 -m state --state NEW -m recent --set --name SSH
+    iptables -A INPUT -i eth0 -p tcp --dport 22 -m state --state NEW -m recent --update --seconds 60 --hitcount 3 --name SSH -j DROP
+    # Enable Normal SSH Connection
+    iptables -A INPUT -p tcp -m state --state NEW --dport 22 -j ACCEPT
+这条规则已经在服务器上跑了一个月，阻止了大部分攻击。它会统计一分钟内与本机22端口（SSH端口）的新建连接数，如果某IP一分钟内达到3次，就忽略之后的连接。    
+另外如果你的默认INPUT策略是DROP，那么我们还需要明确告诉iptables“如果一分钟内没有连续连接超过3次，那么就允许连接”。    
+最后提醒大家一点，“允许连接”和“阻止攻击”的顺序不能颠倒，否则等于没有过滤。iptables非常“忠诚”，它严格按照规则办事，所以你不应该假设它理解你的意图。    
+
+## 
+    
 需求1：只允许IP（1.1.1.1）访问linux服务器，阻止其它IP访问    
 iptables -A INPUT -s 1.1.1.1 -j ACCEPT        
 #允许指定IP访问    
