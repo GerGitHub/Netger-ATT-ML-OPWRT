@@ -1,9 +1,9 @@
-# Iptables使用   
+# Iptables使用
 
-###防暴力破解的命令一    
+###防暴力破解的命令一
 
-        iptables -I INPUT -p tcp --dport 22 -i eth0 -m state --state NEW -m recent --set
-        iptables -I INPUT -p tcp --dport 22 -i eth0 -m state --state NEW -m recent --update --seconds 60 --hitcount 4 -j DROP
+    iptables -I INPUT -p tcp --dport 22 -i eth0 -m state --state NEW -m recent --set
+    iptables -I INPUT -p tcp --dport 22 -i eth0 -m state --state NEW -m recent --update --seconds 60 --hitcount 4 -j DROP
      
 第一句是说，对于外来数据，如果是 TCP 协议，目标端口号是 22，网络接口是 eth0，状态是新连接，那么把它加到最近列表中。        
 第二句是说，对于这样的连接，如果在最近列表中，并且在 60 秒内达到或者超过四次，那么丢弃该数据。其中的-m是模块的意思。         
