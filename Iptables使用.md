@@ -4,6 +4,34 @@
 iptables规则允许规则需放在阻止规则上面，因为linux执行规则时是从上往下，如果让系统先执行阻止规则，再去执行允许规则，允许规则会失效。    
 iptables的规则匹配顺序上从上到下的，也就是说如果上下两条规则有冲突时，将会以上面的规则为准。
 
+
+## 使用成功的方法    
+
+linux下的解决方法很简单     
+shibby tomato 系统 
+Administration/scripts/firewall 系统管理/脚本/防火墙 添加以下命令
+
+    iptables -I INPUT 1 -i ppp0 -p tcp -m multiport --dport 20,25,443,135,137:139,161,1080,3389 -m state --state NEW -m recent --name hack --set -j DROP
+    iptables -I INPUT -i ppp0 -m recent --name hack --update -j DROP
+
+只要有人扫描来自ppp0端口的tcp端口20,25,443,135,137:139,161,1080,3389。就用iptables recent模块加入自定义列表hack，并将这些ip丢弃，非常有用。 
+在shibbyt tomato下面可能还要启用Administration/Admin Access /Admin Restrictions 启用SSH限制 ddwrt没这个问题    
+iptables -I INPUT 1...表示该规则放在第几行     
+       
+tomato WEB工具/系统命令 输入以下命令 重启防火墙 使新添加规则生效
+
+    service firewall restart
+
+运行一段时间后查询hack可看到被拦接IP
+
+    root@Da:/tmp/home/root# cat /proc/net/xt_recent/hack    
+src=42.192.10.42 ttl: 112 last_seen: 72206479 oldest_pkt: 1 72206479   
+src=1.163.192.146 ttl: 115 last_seen: 74430748 oldest_pkt: 1 74430748    
+src=61.231.2.88 ttl: 115 last_seen: 73777360 oldest_pkt: 1 73777360    
+src=91.188.124.166 ttl: 19 last_seen: 72714995 oldest_pkt: 1 72714995    
+src=221.192.199.57 ttl: 117 last_seen: 74526423 oldest_pkt: 15 72231070, 7252680    
+
+
 ### 防暴力破解的命令一    
 
     iptables -I INPUT -p tcp --dport 22 -i eth0 -m state --state NEW -m recent --set
