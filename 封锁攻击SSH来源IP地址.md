@@ -2,8 +2,12 @@
 
 ### 命令方式
        
-    cat /mnt/sda1/Shells/black2.list | awk '/Failed/{print $(NF-3)}' |sort |awk  '{a[$1]++}END{for (j in a) print a[j],j | "sort -r -k 1"}'|awk  '{print $2"="$1}'   
-  #由于tomato没有uniq命令 使用 awk  '{a[$1]++}END{for (j in a) print a[j],j  来替代 uniq -c 功能， 去重复并统计重复数 
+    cat /mnt/sda1/Shells/black2.list | awk '/Failed/{print $(NF-3)}' |sort |awk  '{a[$1]++}END{for (j in a) print a[j],j | "sort -r -k 1"}'|awk  '{print $2"="$1}'  
+
+
+  #由于tomato没有uniq命令 使用 awk  '{a[$1]++}END{for (j in a) print a[j],j  来替代 uniq -c 功能， 去重复并统计重复数   
+ 
+       cat /var/log/messages | awk '/Bad password | Login attempt/{print $(NF-0)}'|awk -F : '{print $1}'|sort |awk  '{a[$1]++}END{for (j in a) print a[j],j | "sort -r -k 1"}'|awk  '{print $2"="$1}'  
   
   
 ## 参考资料 1
@@ -47,9 +51,9 @@ Sep 17 09:10:14 localhost sshd[29223]: Failed password for root from 13.7.3.6 po
 ## 参考资料 2   
 [shell awk 统计重复个数](http://leichenlei.iteye.com/blog/1676649)                
 有文件file.log内容如下：            
-http://www.sohu.com/aaa     
-http://www.sina.com/111             
-http://www.sohu.com/bbb              
+http://www.sohu.com/aaa        
+http://www.sina.com/111                
+http://www.sohu.com/bbb                
 http://www.sina.com/222             
 http://www.sohu.com/ccc           
 http://www.163.com/zzz         
