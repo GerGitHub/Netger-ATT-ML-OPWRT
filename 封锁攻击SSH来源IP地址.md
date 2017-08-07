@@ -2,11 +2,10 @@
 
 ### 命令方式
        
-    cat /mnt/sda1/Shells/black2.list | awk '/Failed/{print $(NF-3)}' |sort |awk  '{a[$1]++}END{for (j in a) print a[j],j | "sort -r -k 1"}'|awk  '{print $2"="$1}'  
+    cat /mnt/sda1/Shells/black2.list | awk '/Failed/{print $(NF-3)}' |sort |uniq -c|awk  '{print $2"="$1}'  
 
 
-  #由于tomato没有uniq命令 使用 awk  '{a[$1]++}END{for (j in a) print a[j],j  来替代 uniq -c 功能， 去重复并统计重复数   
- 
+  #由于tomato没有uniq命令 使用awk  '{a[$1]++}END{for (j in a) print a[j],j | "sort -r -k 1"}' 来替代 uniq -c 功能， 去重复并统计重复数  
        cat /var/log/messages | awk '/Bad password | Login attempt/{print $(NF-0)}'|awk -F : '{print $1}'|sort |awk  '{a[$1]++}END{for (j in a) print a[j],j | "sort -r -k 1"}'|awk  '{print $2"="$1}'  
   
   
