@@ -9,9 +9,9 @@ tomato WEB工具/系统命令 输入以下命令 重启防火墙 使新添加规
 
 ## 限制规定时间内连接请求次数  方法1 
 tomato 系统  Administration/scripts/firewall 系统管理/脚本/防火墙 添加以下命令   
-    
-    iptables -I INPUT -i ppp0 -p tcp -m multiport --dport 20,21,22,25,135,137:139,161,443,445,1080,3389 -m state --state NEW -m recent --name hack --set -j ACCEPT    
-    iptables -I INPUT -i ppp0 -p tcp -m multiport --dport 20,21,22,25,135,137:139,161,443,445,1080,3389 -m state --state NEW -m recent --name hack --hitcount 3 --seconds 1800 --update -j DROP    
+
+    iptables -I INPUT -i ppp0 -p tcp -m multiport --dport 20,21,22,25,135,137:139,161,443,445,1080,3389 -m state --state NEW -m recent --name hack --set -j ACCEPT    
+    iptables -I INPUT -i ppp0 -p tcp -m multiport --dport 20,21,22,25,135,137:139,161,443,445,1080,3389 -m state --state NEW -m recent --name hack --hitcount 3 --seconds 1800 --update -j DROP    
     
 规则添加顺序与执行规则排列顺序 ---相反 即A,B,C会按C,B,A依序执行   
 第2条 更新查询名为hack的记录表, 对在30分钟内对规定，端口, 已发送过3次新建连接请求的IP执行丢弃, 第4次即开始丢弃    
