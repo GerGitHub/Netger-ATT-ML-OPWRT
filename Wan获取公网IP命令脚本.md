@@ -82,13 +82,17 @@ cru a GDDIP "* 5 * * * /jffs/scripts/GDDIP.sh"  , 每天5点钟执行该命令
 + openwrt 自动内网重拨 切换并保持公网IP的脚本 
 http://www.right.com.cn/forum/forum.php?mod=viewthread&tid=172193&highlight=%D6%D8%B2%A6            
 
++ python获取公网ip的几种方式
+http://blog.csdn.net/conquerwave/article/details/77666226      
+
   
 ###  其它几种获取WAN口IP命令方法   
 
 
 ### IP查询     
 
-http://members.3322.org/dyndns/getip          
+http://members.3322.org/dyndns/getip  
+http://ip.42.pl/raw    
 http://checkip.dyndns.org            
 http://checkip.dyndns.org:8245           
 http://echo.tzo.com             
