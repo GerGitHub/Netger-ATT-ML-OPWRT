@@ -81,3 +81,24 @@ cru a GDDIP "* 5 * * * /jffs/scripts/GDDIP.sh"  , 每天5点钟执行该命令
   
   
 ###  其它几种获取WAN口IP命令方法   
+
+
+### IP查询     
+
+http://members.3322.org/dyndns/getip          
+http://checkip.dyndns.org            
+http://checkip.dyndns.org:8245           
+http://echo.tzo.com             
+http://ip.dnsexit.com         
+http://ip.changeip.com        
+http://myip.dnsomatic.com            
+http://ip1.dynupdate.no-ip.com          
+http://checkip.dns.he.net          
+http://checkip.zerigo.com          
+http://checkip.two-dns.de             
+http://ipv4.wtfismyip.com/text            
+http://ipv4.nsupdate.info/myip            
+http://myip.dtdns.com        
+
+
+
