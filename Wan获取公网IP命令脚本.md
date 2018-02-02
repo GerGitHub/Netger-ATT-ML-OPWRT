@@ -77,8 +77,11 @@ cru a GDDIP "* 5 * * * /jffs/scripts/GDDIP.sh"  , 每天5点钟执行该命令
 + 新建命令文件 GDDIP.sh 保存至 /jffs/scripts/ 目录
 + 在 /jffs/scripts/init-start 文件内写入计划命令   
   cru a GDDIP "*/1 * * * * /jffs/scripts/GDDIP.sh"  , 每1分钟执行1次
-  
-  
+  
+### 收集方法
++ openwrt 自动内网重拨 切换并保持公网IP的脚本 
+http://www.right.com.cn/forum/forum.php?mod=viewthread&tid=172193&highlight=%D6%D8%B2%A6            
+
   
 ###  其它几种获取WAN口IP命令方法   
 
