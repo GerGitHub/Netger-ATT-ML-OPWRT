@@ -9,24 +9,24 @@
     opkg update
     opkg install shadowsocks
      
-+ winscp登录 或者 vi 命令修改 /opt/etc/init.d/S22shadowsocks            
-        
++ winscp登录 或者 vi 命令修改 /opt/etc/init.d/S22shadowsocks              
+    
       #!/bin/sh
     
       ENABLED=yes
       PROCS=ss-local
       ARGS="-c /opt/etc/shadowsocks.json"
-      PREARGS=""
-      DESC=$PROCS
-      PATH=/opt/sbin:/opt/bin:/opt/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    PREARGS=""
+    DESC=$PROCS
+    PATH=/opt/sbin:/opt/bin:/opt/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-      . /opt/etc/init.d/rc.func     
+    . /opt/etc/init.d/rc.func     
     
-      // 本行及以下内容为注释
-      ROCS=ss-local 可改为 ROCS=ss-redir 
-      ARGS="-c /opt/etc/shadowsocks.json" 必须改为 ARGS="-b 0.0.0.0 -c /opt/etc/shadowsocks.json" ，本人就掉在这坑里；
+    // 本行及以下内容为注释
+    ROCS=ss-local 可改为 ROCS=ss-redir 
+    ARGS="-c /opt/etc/shadowsocks.json" 必须改为 ARGS="-b 0.0.0.0 -c /opt/etc/shadowsocks.json" ，本人就掉在这坑里；
     
-        
+    
 + 修改 /opt/etc/shadowsocks.json     
    
       {
