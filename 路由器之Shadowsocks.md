@@ -22,7 +22,7 @@
     
       . /opt/etc/init.d/rc.func     
     
-       // 本行及以下内容为注释
+       // 本行及以下内容为注释               
        ROCS=ss-local 可改为 ROCS=ss-redir  2.1.4版本后的shadowsocks ss-local不知为何failed
        ARGS="-c /opt/etc/shadowsocks.json" 必须改为 ARGS="-b 0.0.0.0 -c /opt/etc/shadowsocks.json" ，本人就掉在这坑里；
     
