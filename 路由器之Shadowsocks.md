@@ -16,15 +16,15 @@
       ENABLED=yes
       PROCS=ss-local
       ARGS="-c /opt/etc/shadowsocks.json"
-    PREARGS=""
-    DESC=$PROCS
-    PATH=/opt/sbin:/opt/bin:/opt/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-
-    . /opt/etc/init.d/rc.func     
+      PREARGS=""
+      DESC=$PROCS
+      PATH=/opt/sbin:/opt/bin:/opt/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     
-    // 本行及以下内容为注释
-    ROCS=ss-local 可改为 ROCS=ss-redir 
-    ARGS="-c /opt/etc/shadowsocks.json" 必须改为 ARGS="-b 0.0.0.0 -c /opt/etc/shadowsocks.json" ，本人就掉在这坑里；
+      . /opt/etc/init.d/rc.func     
+    
+      // 本行及以下内容为注释
+      ROCS=ss-local 可改为 ROCS=ss-redir 
+      ARGS="-c /opt/etc/shadowsocks.json" 必须改为 ARGS="-b 0.0.0.0 -c /opt/etc/shadowsocks.json" ，本人就掉在这坑里；
     
     
 + 修改 /opt/etc/shadowsocks.json     
@@ -40,4 +40,4 @@
      }
    
 + 关于掉坑的问题           
-  [Asuswrt-merlin固件entware-arm环境SS番茄教程（基本完工，持续...].(http://www.52asus.com/thread-1009-1-1.html)
+  [Asuswrt-merlin固件entware-arm环境SS番茄教程（基本完工，持续...](http://www.52asus.com/thread-1009-1-1.html)
