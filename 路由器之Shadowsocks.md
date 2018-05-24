@@ -4,7 +4,7 @@
 
 + 挂载USB, 安装 entware-ng    
 
-+++ 安装shadowsocks-libev          
++ 安装shadowsocks-libev          
       
     opkg update
     opkg install shadowsocks
@@ -37,7 +37,7 @@
        "password":"your server pwd",
        "timeout":60,
        "method":"aes-256-cfb"
-     }
+      }
    
 + 关于掉坑的问题           
   [Asuswrt-merlin固件entware-arm环境SS番茄教程（基本完工，持续...](http://www.52asus.com/thread-1009-1-1.html)
