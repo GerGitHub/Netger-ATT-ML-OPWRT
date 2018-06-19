@@ -1,4 +1,4 @@
-# shell文本处理之 sed
+# shell文件处理之 sed
    
 ###  删除文件中含特定字符串的行[bash]:
       
