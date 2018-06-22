@@ -122,7 +122,7 @@ sed 匹配100_1000或bigger_1000
 
 ### 删除文件 多个 和 并且 关键字符方式 匹配与
      
-      sed -i '/^0\|^:/{/github/d}' aa.txt  删除aa.txt中以 0 或者 ：并且含有github的行
+      sed -i '/^0\|^:/{/github/d}' aa.txt  删除aa.txt中以 0 或者 ：开头，并且含有github的行
       
       
 
